@@ -21,6 +21,7 @@
 
 	<modules>
 		<module>white-bank-cmd</module>
+		<module>white-bank-query</module>
 	</modules>
 
 	<dependencies>
