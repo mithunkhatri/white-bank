@@ -6,7 +6,6 @@
 		<groupId>com.mithunkhatri</groupId>
 		<artifactId>white-bank</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mithunkhatri</groupId>
 	<artifactId>white-bank-query</artifactId>
