@@ -3,3 +3,10 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://whitebank:whitebank@whitebank.ypzuf9p.mongodb.net/whitebankquery?retryWrites=true&w=majority
+
+server:
+  port: 8082
+
+axon:
+  serializer:
+    messages: default

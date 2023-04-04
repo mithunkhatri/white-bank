@@ -11,3 +11,6 @@ spring:
 axon:
   serializer:
     general: jackson
+
+server:
+  port: 8081
