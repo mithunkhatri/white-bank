@@ -1,7 +1,7 @@
 package com.mithunkhatri.whitebankquery.account.models;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountTransaction {
     
-    private Date transactionOn;
+    private Instant transactionOn;
     private String type;
     private BigDecimal amount;
 }

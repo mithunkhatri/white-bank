@@ -1,10 +1,11 @@
 package com.mithunkhatri.whitebankquery.account.handlers;
 
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.Timestamp;
 import org.springframework.stereotype.Component;
 
 import com.mithunkhatri.whitebankcommon.account.events.AmountCreditedEvent;
@@ -36,27 +37,27 @@ public class BankAccountEventHandler {
     }
 
     @EventHandler
-    public void handle(AmountDebitedEvent event) {
+    public void handle(AmountDebitedEvent event, @Timestamp Instant actionTime) {
         Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());
         if(!accountOptional.isPresent()) {
             throw new RuntimeException("Account does not exist with id : " + event.getAccountId());
         }
         BankAccount account = accountOptional.get();
         account.getTransactions()
-            .add(new AccountTransaction(new Date(), "DEBIT", event.getAmount()));
+            .add(new AccountTransaction(actionTime, "DEBIT", event.getAmount()));
         account.setBalance(event.getNewBalance());
         this.bankAccountRepository.save(account);
     }
 
     @EventHandler
-    public void handle(AmountCreditedEvent event) {
+    public void handle(AmountCreditedEvent event, @Timestamp Instant actionTime) {
         Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());
         if(!accountOptional.isPresent()) {
             throw new RuntimeException("Account does not exist with id : " + event.getAccountId());
         }
         BankAccount account = accountOptional.get();
         account.getTransactions()
-            .add(new AccountTransaction(new Date(), "CREDIT", event.getAmount()));
+            .add(new AccountTransaction(actionTime, "CREDIT", event.getAmount()));
         account.setBalance(event.getNewBalance());
         this.bankAccountRepository.save(account);
     }
