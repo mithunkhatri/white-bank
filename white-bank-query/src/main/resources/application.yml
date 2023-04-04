@@ -9,4 +9,4 @@ server:
 
 axon:
   serializer:
-    messages: default
+    messages: jackson
