@@ -31,12 +31,12 @@ public class BankAccountController {
   private BankAccountService bankAccountService;
 
   @GetMapping
-  public CompletableFuture<List<BankAccountResponse>> all() {
+  public List<BankAccountResponse> all() {
 
     return this.bankAccountService.getAll()
-        .thenApply(t -> t.stream()
-            .map(bankAccount -> docToResponse(bankAccount))
-            .collect(Collectors.toList()));
+        .stream()
+        .map(bankAccount -> docToResponse(bankAccount))
+        .collect(Collectors.toList());
   }
 
   @GetMapping(value = "/red")
@@ -61,11 +61,11 @@ public class BankAccountController {
   public List<AccountTransactionResponse> accountTransactions(@PathVariable String accountId,
       @RequestParam(required = false) String since) {
 
-        if(since != null) {
-          LocalDate localDate = LocalDate.parse(since, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-          Instant sinceInstant = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
-          return this.bankAccountService.getAccountTransactions(accountId, sinceInstant);
-        }
-        return this.bankAccountService.getAccountTransactions(accountId);
+    if (since != null) {
+      LocalDate localDate = LocalDate.parse(since, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+      Instant sinceInstant = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
+      return this.bankAccountService.getAccountTransactions(accountId, sinceInstant);
+    }
+    return this.bankAccountService.getAccountTransactions(accountId);
   }
 }

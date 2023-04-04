@@ -1,12 +1,12 @@
 package com.mithunkhatri.whitebankquery.account.handlers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
 import com.mithunkhatri.whitebankquery.account.models.BankAccount;
+import com.mithunkhatri.whitebankquery.account.models.BankAccounts;
 import com.mithunkhatri.whitebankquery.account.queries.FindAccountById;
 import com.mithunkhatri.whitebankquery.account.queries.FindAllAccount;
 import com.mithunkhatri.whitebankquery.account.queries.FindAllRedAccount;
@@ -21,13 +21,13 @@ public class BankAccountQueryHandler {
   private BankAccountRepository bankAccountRepository;
 
   @QueryHandler
-  public List<BankAccount> handle(FindAllAccount query) {
-    return this.bankAccountRepository.findAll();
+  public BankAccounts handle(FindAllAccount query) {
+    return new BankAccounts(this.bankAccountRepository.findAll());
   }
 
   @QueryHandler
-  public List<BankAccount> handle(FindAllRedAccount query) {
-    return this.bankAccountRepository.findByBalanceLessThan(query.getRedMarker());
+  public BankAccounts handle(FindAllRedAccount query) {
+    return new BankAccounts(this.bankAccountRepository.findByBalanceLessThan(query.getRedMarker()));
   }
 
   @QueryHandler

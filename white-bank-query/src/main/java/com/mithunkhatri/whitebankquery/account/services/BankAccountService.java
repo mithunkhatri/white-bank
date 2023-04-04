@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.mithunkhatri.whitebankquery.account.controllers.AccountTransactionResponse;
 import com.mithunkhatri.whitebankquery.account.mappers.BankAccountMapper;
 import com.mithunkhatri.whitebankquery.account.models.BankAccount;
+import com.mithunkhatri.whitebankquery.account.models.BankAccounts;
 import com.mithunkhatri.whitebankquery.account.queries.FindAccountById;
 import com.mithunkhatri.whitebankquery.account.queries.FindAllAccount;
 import com.mithunkhatri.whitebankquery.account.queries.FindAllRedAccount;
@@ -27,15 +28,13 @@ public class BankAccountService {
 
   private QueryGateway queryGateway;
 
-  public CompletableFuture<List<BankAccount>> getAll() {
+  public List<BankAccount> getAll() {
 
-    return this.queryGateway.query(new FindAllAccount(),
-        ResponseTypes.multipleInstancesOf(BankAccount.class));
+    return this.queryGateway.query(new FindAllAccount(), BankAccounts.class).join().getBankAccounts();
   }
 
   public List<BankAccount> getAllRed() {
-    return this.queryGateway.query(new FindAllRedAccount(BigDecimal.ZERO),
-        ResponseTypes.multipleInstancesOf(BankAccount.class)).join();
+    return this.queryGateway.query(new FindAllRedAccount(BigDecimal.ZERO), BankAccounts.class).join().getBankAccounts();
   }
 
   public BankAccount getAccountById(String accountId) {
