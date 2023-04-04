@@ -15,4 +15,13 @@ public class AccountTransaction {
     private Instant transactionOn;
     private String type;
     private BigDecimal amount;
+    private String status;
+    private String reason;
+
+
+    public AccountTransaction(Instant transactionOn, String type, BigDecimal amount) {
+      this.transactionOn = transactionOn;
+      this.type = type;
+      this.amount = amount;
+    }
 }

@@ -16,7 +16,7 @@ public class BankAccountMapper {
             bankAccount.getAccountId(),
             bankAccount.getAccountOwner(),
             bankAccount.getBalance(),
-            bankAccount.getOverdraftLimit(),
+            bankAccount.getCreditLine(),
             bankAccount.getStatus());
     }
 
@@ -34,7 +34,9 @@ public class BankAccountMapper {
         return new AccountTransactionResponse(
             transaction.getTransactionOn(),
             transaction.getType(),
-            transaction.getAmount()
+            transaction.getAmount(),
+            transaction.getStatus(),
+            transaction.getReason()
         );
     }
 }

@@ -9,6 +9,7 @@ import org.axonframework.eventhandling.Timestamp;
 import org.springframework.stereotype.Component;
 
 import com.mithunkhatri.whitebankcommon.account.events.AmountCreditedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.AmountDebitPendingEvent;
 import com.mithunkhatri.whitebankcommon.account.events.AmountDebitedEvent;
 import com.mithunkhatri.whitebankcommon.account.events.BankAccountCreatedEvent;
 import com.mithunkhatri.whitebankquery.account.models.AccountTransaction;
@@ -30,7 +31,7 @@ public class BankAccountEventHandler {
                 event.getAccountId(),
                 event.getAccountOwner(),
                 event.getInitialDeposit(),
-                event.getOverdraftLimit(),
+                event.getCreditLine(),
                 "ACTIVE",
                 new ArrayList<>()
             ));
@@ -46,6 +47,18 @@ public class BankAccountEventHandler {
         account.getTransactions()
             .add(new AccountTransaction(actionTime, "DEBIT", event.getAmount()));
         account.setBalance(event.getNewBalance());
+        this.bankAccountRepository.save(account);
+    }
+
+    @EventHandler
+    public void handle(AmountDebitPendingEvent event, @Timestamp Instant actionTime) {
+      Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());
+        if(!accountOptional.isPresent()) {
+            throw new RuntimeException("Account does not exist with id : " + event.getAccountId());
+        }
+        BankAccount account = accountOptional.get();
+        account.getTransactions()
+            .add(new AccountTransaction(actionTime, "DEBIT", event.getAmount(), event.getStatus(), event.getReason()));
         this.bankAccountRepository.save(account);
     }
 

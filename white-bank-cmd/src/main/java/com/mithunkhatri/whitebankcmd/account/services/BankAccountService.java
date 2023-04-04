@@ -27,7 +27,7 @@ public class BankAccountService {
             UUID.randomUUID().toString(),
             request.getAccountOwner(),
             request.getInitialDeposit(),
-            request.getOverdraftLimit()
+            request.getCreditLine()
         ));
     } 
 

@@ -14,6 +14,6 @@ public class BankAccountResponse {
     private String accountId;
     private String accountOwner;
     private BigDecimal balance;
-    private BigDecimal overdraftLimit;
+    private BigDecimal creditLine;
     private String status;
 }

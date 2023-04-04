@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccountCreatedEvent {
-    
-    private String accountId;
-    private String accountOwner;
-    private BigDecimal initialDeposit;
-    private BigDecimal creditLine;
+public class AmountDebitPendingEvent {
+
+  private String accountId;
+  private BigDecimal amount;
+  private String status;
+  private String reason;
 }

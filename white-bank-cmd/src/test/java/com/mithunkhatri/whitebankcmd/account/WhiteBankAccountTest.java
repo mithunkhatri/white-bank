@@ -12,6 +12,7 @@ import com.mithunkhatri.whitebankcmd.account.commands.CreateBankAccountCommand;
 import com.mithunkhatri.whitebankcmd.account.commands.CreditAmountCommand;
 import com.mithunkhatri.whitebankcmd.account.commands.DebitAmountCommand;
 import com.mithunkhatri.whitebankcommon.account.events.AmountCreditedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.AmountDebitPendingEvent;
 import com.mithunkhatri.whitebankcommon.account.events.AmountDebitedEvent;
 import com.mithunkhatri.whitebankcommon.account.events.BankAccountCreatedEvent;
 
@@ -66,6 +67,29 @@ public class WhiteBankAccountTest {
                 accountId,
                 BigDecimal.valueOf(100),
                 BigDecimal.valueOf(900)
+            ));
+    }
+
+    @Test
+    public void givenDebitAmountExceedingCreditLineThenAmountNotDebited() {
+
+        fixture
+            .given(new BankAccountCreatedEvent(
+                accountId,
+                "Mithun",
+                BigDecimal.valueOf(1000),
+                BigDecimal.valueOf(500)
+            ))
+            .when(new DebitAmountCommand(
+                accountId,
+                BigDecimal.valueOf(2100)
+            ))
+            .expectSuccessfulHandlerExecution()
+            .expectEvents(new AmountDebitPendingEvent(
+                accountId,
+                BigDecimal.valueOf(2100),
+                "PENDING",
+                "Credit line exceeded"
             ));
     }
 

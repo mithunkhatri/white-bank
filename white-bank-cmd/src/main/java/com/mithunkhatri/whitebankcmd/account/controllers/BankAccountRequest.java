@@ -13,5 +13,5 @@ public class BankAccountRequest {
     
     private String accountOwner;
     private BigDecimal initialDeposit;
-    private BigDecimal overdraftLimit;
+    private BigDecimal creditLine;
 }
