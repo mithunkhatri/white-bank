@@ -9,7 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.mithunkhatri.whitebankcmd.account.commands.CreateBankAccountCommand;
-import com.mithunkhatri.whitebankcmd.account.events.BankAccountCreatedEvent;
+import com.mithunkhatri.whitebankcmd.account.commands.CreditAmountCommand;
+import com.mithunkhatri.whitebankcmd.account.commands.DebitAmountCommand;
+import com.mithunkhatri.whitebankcommon.account.events.AmountCreditedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.AmountDebitedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.BankAccountCreatedEvent;
 
 public class WhiteBankAccountTest {
     
@@ -40,6 +44,50 @@ public class WhiteBankAccountTest {
                 "Mithun",
                 BigDecimal.valueOf(1000l),
                 BigDecimal.valueOf(500l)
+            ));
+    }
+
+    @Test
+    public void givenDebitAmountThenAmountDebited() {
+
+        fixture
+            .given(new BankAccountCreatedEvent(
+                accountId,
+                "Mithun",
+                BigDecimal.valueOf(1000),
+                BigDecimal.valueOf(500)
+            ))
+            .when(new DebitAmountCommand(
+                accountId,
+                BigDecimal.valueOf(100)
+            ))
+            .expectSuccessfulHandlerExecution()
+            .expectEvents(new AmountDebitedEvent(
+                accountId,
+                BigDecimal.valueOf(100),
+                BigDecimal.valueOf(900)
+            ));
+    }
+
+    @Test
+    public void givenCreditAmountThenAmountCredited() {
+
+        fixture
+            .given(new BankAccountCreatedEvent(
+                accountId,
+                "Mithun",
+                BigDecimal.valueOf(1000),
+                BigDecimal.valueOf(500)
+            ))
+            .when(new CreditAmountCommand(
+                accountId,
+                BigDecimal.valueOf(100)
+            ))
+            .expectSuccessfulHandlerExecution()
+            .expectEvents(new AmountCreditedEvent(
+                accountId,
+                BigDecimal.valueOf(100),
+                BigDecimal.valueOf(1100)
             ));
     }
 }

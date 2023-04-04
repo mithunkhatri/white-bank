@@ -1,4 +1,4 @@
-package com.mithunkhatri.whitebankcmd.account.events;
+package com.mithunkhatri.whitebankcommon.account.events;
 
 import java.math.BigDecimal;
 

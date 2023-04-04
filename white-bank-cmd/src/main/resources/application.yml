@@ -1,4 +1,13 @@
 spring:
     datasource:
         url: jdbc:h2:mem::whitebankcmd
+        username: sa
+        password: sa
         driverClassName: org.h2.Driver
+    h2:
+        console:
+            enabled: true
+
+axon:
+  serializer:
+    general: jackson

@@ -11,16 +11,14 @@ import org.axonframework.spring.stereotype.Aggregate;
 import com.mithunkhatri.whitebankcmd.account.commands.CreateBankAccountCommand;
 import com.mithunkhatri.whitebankcmd.account.commands.CreditAmountCommand;
 import com.mithunkhatri.whitebankcmd.account.commands.DebitAmountCommand;
-import com.mithunkhatri.whitebankcmd.account.events.AmountCreditedEvent;
-import com.mithunkhatri.whitebankcmd.account.events.AmountDebitedEvent;
-import com.mithunkhatri.whitebankcmd.account.events.BankAccountCreatedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.AmountCreditedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.AmountDebitedEvent;
+import com.mithunkhatri.whitebankcommon.account.events.BankAccountCreatedEvent;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Aggregate
 @NoArgsConstructor
-@Getter
 public class BankAccountAggregate {
     
     @AggregateIdentifier
@@ -53,27 +51,31 @@ public class BankAccountAggregate {
     }
 
     @CommandHandler
-    public BankAccountAggregate(DebitAmountCommand command) {
+    public void handle(DebitAmountCommand command) {
         AggregateLifecycle.apply(
-            new AmountDebitedEvent(command.getAccountId(), command.getAmount())
+            new AmountDebitedEvent(command.getAccountId(), 
+                command.getAmount(),
+                this.balance.subtract(command.getAmount()))
         );
     }
 
     @EventSourcingHandler
     public void on(AmountDebitedEvent event) {
         // not considering overdraft limit check
-        this.balance = this.balance.subtract(event.getAmount());
+        this.balance = event.getNewBalance();
     }
 
     @CommandHandler
-    public BankAccountAggregate(CreditAmountCommand command) {
+    public void handle(CreditAmountCommand command) {
         AggregateLifecycle.apply(
-            new AmountCreditedEvent(command.getAccountId(), command.getAmount())
+            new AmountCreditedEvent(command.getAccountId(), 
+                command.getAmount(),
+                this.balance.add(command.getAmount()))
         );
     }
 
     @EventSourcingHandler
     public void on(AmountCreditedEvent event) {
-        this.balance = this.balance.add(event.getAmount());
+        this.balance = event.getNewBalance();
     }
 }
