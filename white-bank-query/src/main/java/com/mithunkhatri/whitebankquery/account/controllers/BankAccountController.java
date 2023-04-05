@@ -1,16 +1,13 @@
 package com.mithunkhatri.whitebankquery.account.controllers;
 
-import static com.mithunkhatri.whitebankquery.account.mappers.BankAccountMapper.docToResponse;
 import static com.mithunkhatri.whitebankquery.account.mappers.BankAccountMapper.docToBalanceResponse;
+import static com.mithunkhatri.whitebankquery.account.mappers.BankAccountMapper.docToResponse;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,5 +1,7 @@
 
 spring:
+  application:
+    name: white-bank-query
   data:
     mongodb:
       uri: mongodb+srv://whitebank:whitebank@whitebank.ypzuf9p.mongodb.net/whitebankquery?retryWrites=true&w=majority
@@ -10,3 +12,8 @@ server:
 axon:
   serializer:
     messages: jackson
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8671/eureka
