@@ -60,8 +60,8 @@ public class WhiteBankAccountTest {
             BigDecimal.valueOf(100)))
         .expectSuccessfulHandlerExecution()
         .expectEvents(new AmountDebitedEvent(
-            accountId,
             transactionId,
+            accountId,
             BigDecimal.valueOf(100),
             BigDecimal.valueOf(900)));
   }
@@ -81,8 +81,8 @@ public class WhiteBankAccountTest {
             BigDecimal.valueOf(2100)))
         .expectSuccessfulHandlerExecution()
         .expectEvents(new AmountDebitPendingEvent(
-            accountId,
             transactionId,
+            accountId,
             BigDecimal.valueOf(2100),
             "PENDING",
             "Credit line exceeded"));
@@ -103,8 +103,8 @@ public class WhiteBankAccountTest {
             BigDecimal.valueOf(100)))
         .expectSuccessfulHandlerExecution()
         .expectEvents(new AmountCreditedEvent(
-            accountId,
             transactionId,
+            accountId,
             BigDecimal.valueOf(100),
             BigDecimal.valueOf(1100)));
   }
