@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AmountCreditedEvent {
-    
-    private String accountId;
-    private BigDecimal amount;
-    private BigDecimal newBalance;
+
+  private String transactionId;
+  private String accountId;
+  private BigDecimal amount;
+  private BigDecimal newBalance;
 }

@@ -11,17 +11,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountTransaction {
-    
-    private Instant transactionOn;
-    private String type;
-    private BigDecimal amount;
-    private String status;
-    private String reason;
 
+  private String transactionId;
+  private Instant transactionOn;
+  private String type;
+  private BigDecimal amount;
+  private String status;
+  private String reason;
 
-    public AccountTransaction(Instant transactionOn, String type, BigDecimal amount) {
-      this.transactionOn = transactionOn;
-      this.type = type;
-      this.amount = amount;
-    }
+  public AccountTransaction(String transactionId, Instant transactionOn, String type, BigDecimal amount) {
+    this.transactionId = transactionId;
+    this.transactionOn = transactionOn;
+    this.type = type;
+    this.amount = amount;
+  }
 }

@@ -17,10 +17,11 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
 public class AccountTransactionResponse {
-    
-    private Instant transactionOn;
-    private String type;
-    private BigDecimal amount;
-    private String status;
-    private String reason;
+
+  private String transactionId;
+  private Instant transactionOn;
+  private String type;
+  private BigDecimal amount;
+  private String status;
+  private String reason;
 }

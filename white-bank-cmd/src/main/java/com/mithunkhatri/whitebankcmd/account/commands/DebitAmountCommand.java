@@ -15,6 +15,7 @@ public class DebitAmountCommand {
     
     @TargetAggregateIdentifier
     private String accountId;
-
+    
+    private String transactionId;
     private BigDecimal amount;
 }

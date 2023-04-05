@@ -55,15 +55,19 @@ public class BankAccountAggregate {
   public void handle(DebitAmountCommand command) {
     BigDecimal newBalance = this.balance.subtract(command.getAmount());
     if (newBalance.compareTo(this.creditLine.multiply(BigDecimal.valueOf(-1))) < 0) {
-      log.warn("Credit line exceeded, transaction is not allowed. Account : {}", accountId);
+      log.warn("Credit line exceeded, transaction is not allowed. Account : {}, Transaction : {}", accountId, command.getTransactionId());
       AggregateLifecycle.apply(
-          new AmountDebitPendingEvent(command.getAccountId(),
+          new AmountDebitPendingEvent(
+              command.getTransactionId(),
+              command.getAccountId(),
               command.getAmount(),
               "PENDING",
               "Credit line exceeded"));
     } else {
       AggregateLifecycle.apply(
-          new AmountDebitedEvent(command.getAccountId(),
+          new AmountDebitedEvent(
+              command.getTransactionId(),
+              command.getAccountId(),
               command.getAmount(),
               newBalance));
     }
@@ -83,7 +87,9 @@ public class BankAccountAggregate {
   @CommandHandler
   public void handle(CreditAmountCommand command) {
     AggregateLifecycle.apply(
-        new AmountCreditedEvent(command.getAccountId(),
+        new AmountCreditedEvent(
+            command.getTransactionId(),
+            command.getAccountId(),
             command.getAmount(),
             this.balance.add(command.getAmount())));
   }

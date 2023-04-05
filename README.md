@@ -40,7 +40,7 @@ Query
 ## Assumptions
 - Bank account is a single currency type account. Debit, credit and initial balance are all in the same currency. Exchange rate and currency conversion is not required.
 - Debit request exceeding the credit line are marked as PENDING, reprocessing of the PENDING transaction is not required
-- Account owner details are not maintained
+- Account owner details management is not required
 
 # High Level Diagram
 ![High Level Diagram](/assets/images/HighLevel.png "High Level Diagram")

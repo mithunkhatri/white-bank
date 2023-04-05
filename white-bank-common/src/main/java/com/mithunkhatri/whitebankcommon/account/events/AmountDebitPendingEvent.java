@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AmountDebitPendingEvent {
 
+  private String transactionId;
   private String accountId;
   private BigDecimal amount;
   private String status;

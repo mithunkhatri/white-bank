@@ -36,7 +36,7 @@ public class BankAccountService {
             throw new RuntimeException("Debit amount can't be zero");
         }
         this.commandGateway.send(
-            new DebitAmountCommand(accountId, request.getAmount())
+            new DebitAmountCommand(accountId, UUID.randomUUID().toString(), request.getAmount())
         );
     }
 
@@ -45,7 +45,7 @@ public class BankAccountService {
             throw new RuntimeException("Credit amount can't be zero");
         }
         this.commandGateway.send(
-            new CreditAmountCommand(accountId, request.getAmount())
+            new CreditAmountCommand(accountId, UUID.randomUUID().toString(), request.getAmount())
         );
     }
 }
