@@ -26,6 +26,23 @@ White Bank - Implementation of CQRS using Axon Framework, Axon Server and Spring
 - [x] Multi module maven project
 - [x] Github Actions to build maven on commit
 
+```
+[INFO] Reactor Summary for White Bank Parent 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] White Bank Common Component ........................ SUCCESS [  6.829 s]
+[INFO] White Bank Parent .................................. SUCCESS [  2.639 s]
+[INFO] White Bank Command Service ......................... SUCCESS [ 55.468 s]
+[INFO] White Bank Query Service ........................... SUCCESS [ 24.799 s]
+[INFO] White Bank Eureka Server ........................... SUCCESS [ 12.827 s]
+[INFO] White Bank Gateway ................................. SUCCESS [ 21.953 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:06 min
+[INFO] Finished at: 2023-04-06T00:31:51+05:30
+[INFO] ------------------------------------------------------------------------
+```
+
 ## Features Implemented
 Command
 - [x] Create bank account with initial deposit and credit line

@@ -2,6 +2,8 @@ package com.mithunkhatri.whitebankcmd.account.controllers;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentRequest {
-    
-    private BigDecimal amount;
+
+  @Min(value = 1l, message = "Payment amount can not be zero or less")
+  private BigDecimal amount;
 }

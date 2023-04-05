@@ -2,6 +2,8 @@ package com.mithunkhatri.whitebankcmd.account.controllers;
 
 import java.util.concurrent.CompletableFuture;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,19 +26,19 @@ public class BankAccountController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CompletableFuture<BankAccountResponse> createBankAccount(@RequestBody BankAccountRequest request) {
+    public CompletableFuture<BankAccountResponse> createBankAccount(@Valid @RequestBody BankAccountRequest request) {
         return bankAccountService.createBankAccount(request);
     }
 
     @PutMapping(value = "/{accountId}/debit")
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public void debit(@RequestBody PaymentRequest request, @PathVariable String accountId) {
+    public void debit(@Valid @RequestBody PaymentRequest request, @PathVariable String accountId) {
         this.bankAccountService.debitAmount(request, accountId);
     }
 
     @PutMapping(value = "/{accountId}/credit")
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public void credit(@RequestBody PaymentRequest request, @PathVariable String accountId) {
+    public void credit(@Valid @RequestBody PaymentRequest request, @PathVariable String accountId) {
         this.bankAccountService.creditAmount(request, accountId);
     }
 }
