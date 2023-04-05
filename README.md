@@ -17,8 +17,8 @@ White Bank - Implementation of CQRS using Axon Framework, Axon Server and Spring
 - [x] white-bank-query : Query service for retrieving account and transaction details
 - [x] white-bank-common : Holds common data objects
 - [x] Axon Server : Running in a docker container
-- [ ] Eureka Server : Service discovery
-- [ ] Gateway : Routing of the service requests from the client
+- [x] Eureka Server : Service discovery
+- [x] Gateway : Routing of the service requests from the client
   - [ ] Circuit breaker
 - [ ] Distributed tracing
 

@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"accountOwner\": \"Mithun\",\n    \"initialDeposit\": 501,\n    \"creditLine\": 100\n}",
+					"raw": "{\n    \"accountOwner\": \"Mithun\",\n    \"initialDeposit\": 100,\n    \"creditLine\": 100\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,12 +33,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/accounts",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8081",
 					"path": [
 						"accounts"
 					]
@@ -54,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"amount\": 15\n}",
+					"raw": "{\n    \"amount\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -62,12 +60,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/accounts/{{accountId}}/debit",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/{{accountId}}/debit",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8081",
 					"path": [
 						"accounts",
 						"{{accountId}}",
@@ -93,12 +89,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/accounts/{{accountId}}/credit",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/{{accountId}}/credit",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8081",
 					"path": [
 						"accounts",
 						"{{accountId}}",
@@ -115,12 +109,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/accounts/{{accountId}}",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/{{accountId}}",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8082",
 					"path": [
 						"accounts",
 						"{{accountId}}"
@@ -136,12 +128,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/accounts/{{accountId}}/balance",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/{{accountId}}/balance",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8082",
 					"path": [
 						"accounts",
 						"{{accountId}}",
@@ -158,12 +148,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/accounts/{{accountId}}/transactions",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/{{accountId}}/transactions",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8082",
 					"path": [
 						"accounts",
 						"{{accountId}}",
@@ -179,12 +167,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/accounts/{{accountId}}/transactions?since=2023-04-05",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/{{accountId}}/transactions?since=2023-04-01",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8082",
 					"path": [
 						"accounts",
 						"{{accountId}}",
@@ -193,7 +179,7 @@
 					"query": [
 						{
 							"key": "since",
-							"value": "2023-04-05"
+							"value": "2023-04-01"
 						}
 					]
 				},
@@ -207,12 +193,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/accounts",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8082",
 					"path": [
 						"accounts"
 					]
@@ -227,12 +211,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/accounts/red",
-					"protocol": "http",
+					"raw": "{{gateway}}/accounts/red",
 					"host": [
-						"localhost"
+						"{{gateway}}"
 					],
-					"port": "8082",
 					"path": [
 						"accounts",
 						"red"

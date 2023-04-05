@@ -7,7 +7,7 @@ spring:
       uri: mongodb+srv://whitebank:whitebank@whitebank.ypzuf9p.mongodb.net/whitebankquery?retryWrites=true&w=majority
 
 server:
-  port: 8082
+  port: 0
 
 axon:
   serializer:

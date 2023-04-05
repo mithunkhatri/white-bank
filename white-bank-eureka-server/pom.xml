@@ -11,8 +11,8 @@
 	<groupId>com.mithunkhatri</groupId>
 	<artifactId>white-bank-eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>white-bank-eureka-server</name>
-	<description>Demo project for Spring Boot</description>
+	<name>White Bank Eureka Server</name>
+	<description>Eureka server for White Bank</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.6</spring-cloud.version>
