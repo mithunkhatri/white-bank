@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "4c73970c-6807-4f0b-9e99-8484ee30ca44",
+		"name": "White Bank",
+		"description": "Postman collection for command and query services for dummy bank implementation - White Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8415201"
+	},
+	"item": [
+		{
+			"name": "Create Bank Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"postman.setGlobalVariable(\"accountId\", responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountOwner\": \"Mithun\",\n    \"initialDeposit\": 501,\n    \"creditLine\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"accounts"
+					]
+				},
+				"description": "Creates a Bank Account Aggregate"
+			},
+			"response": []
+		},
+		{
+			"name": "Debit amount",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 15\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/accounts/{{accountId}}/debit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"accounts",
+						"{{accountId}}",
+						"debit"
+					]
+				},
+				"description": "Attempts a debit transaction. Checks the credit limit, if the amount is within credit limit, then amount will be debited and balance will be adjusted, otherwise the transaction will remain in pending status and balance will not be adjusted."
+			},
+			"response": []
+		},
+		{
+			"name": "Credit amount",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 50000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/accounts/{{accountId}}/credit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"accounts",
+						"{{accountId}}",
+						"credit"
+					]
+				},
+				"description": "Creates a credit transaction and adjusts the balance."
+			},
+			"response": []
+		},
+		{
+			"name": "GET Account by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/accounts/{{accountId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"{{accountId}}"
+					]
+				},
+				"description": "Retrieves the bank account details by account id."
+			},
+			"response": []
+		},
+		{
+			"name": "GET Account Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/accounts/{{accountId}}/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"{{accountId}}",
+						"balance"
+					]
+				},
+				"description": "Retrieves bank account current balance."
+			},
+			"response": []
+		},
+		{
+			"name": "GET Account Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/accounts/{{accountId}}/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"{{accountId}}",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Account Transactions Since a calendar date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/accounts/{{accountId}}/transactions?since=2023-04-05",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"{{accountId}}",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "2023-04-05"
+						}
+					]
+				},
+				"description": "Retrieves all the transactions occured in the bank account since a calendar date"
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts"
+					]
+				},
+				"description": "Retrieves all bank accounts' details"
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Red Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/accounts/red",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"red"
+					]
+				},
+				"description": "Retrieves red bank accounts i.e., accounts having balance below threshold value."
+			},
+			"response": []
+		}
+	]
+}

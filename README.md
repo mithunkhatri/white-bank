@@ -52,4 +52,4 @@ Query
 TODO
 
 # Postman Collection
-TODO
+[Json](/assets/postman/White%20Bank.postman_collection.json)
