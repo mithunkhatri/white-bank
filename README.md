@@ -1,3 +1,6 @@
+[![Java CI with Maven](https://github.com/mithunkhatri/white-bank/actions/workflows/maven.yml/badge.svg)](https://github.com/mithunkhatri/white-bank/actions/workflows/maven.yml)
+
+
 # White Bank
 White Bank - Implementation of CQRS using Axon Framework, Axon Server and Spring Boot
 
@@ -29,7 +32,7 @@ Command
 - [x] Create credit transaction, and adjust the balance
 - [x] Create debit transaction, and adjust the balance
 - [x] Validation on credit line exceed on a debit transaction. Mark the debit transaction as Pending if credit line is exceed. Balance is not changed in this case.
-- [ ] Add transaction id to debit and credit transactions
+- [x] Add transaction id to debit and credit transactions
 
 Query
 - [x] Retrieve the current account balance of a given bank account
