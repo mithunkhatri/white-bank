@@ -8,6 +8,10 @@ spring:
 
 server:
   port: 0
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: true
 
 axon:
   serializer:

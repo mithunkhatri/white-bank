@@ -12,4 +12,4 @@ public class WhiteBankGatewayApplication {
 		SpringApplication.run(WhiteBankGatewayApplication.class, args);
 	}
 
-}
+} 

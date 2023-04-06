@@ -3,10 +3,6 @@ package com.mithunkhatri.whitebankquery.account.controllers;
 import static com.mithunkhatri.whitebankquery.account.mappers.BankAccountMapper.docToBalanceResponse;
 import static com.mithunkhatri.whitebankquery.account.mappers.BankAccountMapper.docToResponse;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mithunkhatri.whitebankquery.account.services.BankAccountService;
+import com.mithunkhatri.whitebankquery.utils.InstantUtil;
 
 import lombok.AllArgsConstructor;
 
@@ -46,12 +43,12 @@ public class BankAccountController {
 
   @GetMapping(value = "/{accountId}")
   public BankAccountResponse account(@PathVariable String accountId) {
-    return docToResponse(this.bankAccountService.getAccountById(accountId));
+    return docToResponse(this.bankAccountService.validateAndGet(accountId));
   }
 
   @GetMapping(value = "/{accountId}/balance")
   public BankAccountBalanceResponse balance(@PathVariable String accountId) {
-    return docToBalanceResponse(this.bankAccountService.getAccountById(accountId));
+    return docToBalanceResponse(this.bankAccountService.validateAndGet(accountId));
   }
 
   @GetMapping(value = "/{accountId}/transactions")
@@ -59,9 +56,7 @@ public class BankAccountController {
       @RequestParam(required = false) String since) {
 
     if (since != null) {
-      LocalDate localDate = LocalDate.parse(since, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-      Instant sinceInstant = localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
-      return this.bankAccountService.getAccountTransactions(accountId, sinceInstant);
+      return this.bankAccountService.getAccountTransactions(accountId, InstantUtil.toInstant(since));
     }
     return this.bankAccountService.getAccountTransactions(accountId);
   }
