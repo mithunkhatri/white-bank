@@ -16,36 +16,39 @@ import com.mithunkhatri.whitebankcmd.account.controllers.PaymentRequest;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Bank account command gateway service
+ */
 @Component
 @AllArgsConstructor
 public class BankAccountService {
-    
-    private CommandGateway commandGateway;
 
-    public CompletableFuture<BankAccountResponse> createBankAccount(BankAccountRequest request) {
-        return commandGateway.send(new CreateBankAccountCommand(
-            UUID.randomUUID().toString(),
-            request.getAccountOwner(),
-            request.getInitialDeposit(),
-            request.getCreditLine()
-        ));
-    } 
+  private CommandGateway commandGateway;
 
-    public void debitAmount(PaymentRequest request, String accountId) {
-        if(BigDecimal.ZERO.equals(request.getAmount())) {
-            throw new RuntimeException("Debit amount can't be zero");
-        }
-        this.commandGateway.send(
-            new DebitAmountCommand(accountId, UUID.randomUUID().toString(), request.getAmount())
-        );
-    }
+  /**
+   * Sends create bank account command
+   */
+  public CompletableFuture<BankAccountResponse> createBankAccount(BankAccountRequest request) {
+    return commandGateway.send(new CreateBankAccountCommand(
+        UUID.randomUUID().toString(),
+        request.getAccountOwner(),
+        request.getInitialDeposit(),
+        request.getCreditLine()));
+  }
 
-    public void creditAmount(PaymentRequest request, String accountId) {
-        if(BigDecimal.ZERO.equals(request.getAmount())) {
-            throw new RuntimeException("Credit amount can't be zero");
-        }
-        this.commandGateway.send(
-            new CreditAmountCommand(accountId, UUID.randomUUID().toString(), request.getAmount())
-        );
-    }
+  /**
+   * Sends amount debit command
+   */
+  public void debitAmount(PaymentRequest request, String accountId) {
+    this.commandGateway.send(
+        new DebitAmountCommand(accountId, UUID.randomUUID().toString(), request.getAmount()));
+  }
+
+  /**
+   * Sends amount credit command
+   */
+  public void creditAmount(PaymentRequest request, String accountId) {
+    this.commandGateway.send(
+        new CreditAmountCommand(accountId, UUID.randomUUID().toString(), request.getAmount()));
+  }
 }

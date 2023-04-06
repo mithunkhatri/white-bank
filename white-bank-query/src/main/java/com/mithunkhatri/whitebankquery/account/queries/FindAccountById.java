@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FindAccountById {
-    
-    private String accountId;
+
+  private String accountId;
 }

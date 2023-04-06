@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * Bank account create request
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

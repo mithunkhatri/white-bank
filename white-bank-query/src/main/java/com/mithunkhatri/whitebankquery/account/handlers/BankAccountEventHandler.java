@@ -18,6 +18,9 @@ import com.mithunkhatri.whitebankquery.account.repositories.BankAccountRepositor
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Event hanlders to sync the events emitted by command service.
+ */
 @Component
 @AllArgsConstructor
 public class BankAccountEventHandler {
@@ -26,6 +29,11 @@ public class BankAccountEventHandler {
 
   @EventHandler
   public void handle(BankAccountCreatedEvent event) {
+    Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());
+    // Check if account already exists with the accountId
+    if (accountOptional.isPresent()) {
+      throw new RuntimeException("Account already exists with id : " + event.getAccountId());
+    }
     this.bankAccountRepository
         .save(new BankAccount(
             event.getAccountId(),
@@ -36,6 +44,9 @@ public class BankAccountEventHandler {
             new ArrayList<>()));
   }
 
+  /**
+   * Handles debit event and saves the transaction and the new balance
+   */
   @EventHandler
   public void handle(AmountDebitedEvent event, @Timestamp Instant actionTime) {
     Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());
@@ -49,6 +60,9 @@ public class BankAccountEventHandler {
     this.bankAccountRepository.save(account);
   }
 
+  /**
+   * Handles debit event and saves the transaction with status and reason
+   */
   @EventHandler
   public void handle(AmountDebitPendingEvent event, @Timestamp Instant actionTime) {
     Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());
@@ -62,6 +76,9 @@ public class BankAccountEventHandler {
     this.bankAccountRepository.save(account);
   }
 
+  /**
+   * Handles credit event and saves the transaction and the new balance
+   */
   @EventHandler
   public void handle(AmountCreditedEvent event, @Timestamp Instant actionTime) {
     Optional<BankAccount> accountOptional = this.bankAccountRepository.findById(event.getAccountId());

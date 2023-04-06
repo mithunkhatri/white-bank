@@ -19,9 +19,14 @@ import com.mithunkhatri.whitebankcommon.account.events.BankAccountCreatedEvent;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Bank Account aggregate domain object consisting of parameters, command
+ * handling and event sourcing
+ */
 @Aggregate
 @NoArgsConstructor
 @Slf4j
+@SuppressWarnings("unused")
 public class BankAccountAggregate {
 
   @AggregateIdentifier
@@ -32,6 +37,7 @@ public class BankAccountAggregate {
   private BigDecimal creditLine;
   private String status;
 
+  // Handle create bank account command
   @CommandHandler
   public BankAccountAggregate(CreateBankAccountCommand command) {
     AggregateLifecycle.apply(
@@ -42,6 +48,7 @@ public class BankAccountAggregate {
             command.getCreditLine()));
   }
 
+  // Event source and setting the initial state of the aggregate
   @EventSourcingHandler
   public void on(BankAccountCreatedEvent event) {
     this.accountId = event.getAccountId();
@@ -53,9 +60,15 @@ public class BankAccountAggregate {
 
   @CommandHandler
   public void handle(DebitAmountCommand command) {
+    // New balance is calculated based on the debit amount
+    // Its calculated in the command service so that query service can avoid any
+    // calculation
     BigDecimal newBalance = this.balance.subtract(command.getAmount());
+
+    // Checking credit line limit
     if (newBalance.compareTo(this.creditLine.multiply(BigDecimal.valueOf(-1))) < 0) {
-      log.warn("Credit line exceeded, transaction is not allowed. Account : {}, Transaction : {}", accountId, command.getTransactionId());
+      log.warn("Credit line exceeded, transaction is not allowed. Account : {}, Transaction : {}", accountId,
+          command.getTransactionId());
       AggregateLifecycle.apply(
           new AmountDebitPendingEvent(
               command.getTransactionId(),
@@ -69,19 +82,20 @@ public class BankAccountAggregate {
               command.getTransactionId(),
               command.getAccountId(),
               command.getAmount(),
+              // new balance is sent in the event
               newBalance));
     }
   }
 
   @EventSourcingHandler
   public void on(AmountDebitedEvent event) {
-    // not considering overdraft limit check
     this.balance = event.getNewBalance();
   }
 
   @EventSourcingHandler
   public void on(AmountDebitPendingEvent event) {
     // Nothing changes here
+    // New balance is not assigned to the balance value
   }
 
   @CommandHandler
@@ -91,6 +105,7 @@ public class BankAccountAggregate {
             command.getTransactionId(),
             command.getAccountId(),
             command.getAmount(),
+            // new balance is sent in the event
             this.balance.add(command.getAmount())));
   }
 

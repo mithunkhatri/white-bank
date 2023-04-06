@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Payment request. Common class for both debit and credit.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

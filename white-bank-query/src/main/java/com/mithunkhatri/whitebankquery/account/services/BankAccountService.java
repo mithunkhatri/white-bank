@@ -19,6 +19,9 @@ import com.mithunkhatri.whitebankquery.account.queries.FindAllRedAccount;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Service to dispatch queries
+ */
 @Component
 @AllArgsConstructor
 public class BankAccountService {

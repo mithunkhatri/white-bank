@@ -14,6 +14,9 @@ import com.mithunkhatri.whitebankquery.account.repositories.BankAccountRepositor
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Handler for queries dispatched by query gateway
+ */
 @Component
 @AllArgsConstructor
 public class BankAccountQueryHandler {

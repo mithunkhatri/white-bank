@@ -14,5 +14,7 @@ public class AmountDebitedEvent {
   private String transactionId;
   private String accountId;
   private BigDecimal amount;
+
+  // Including new calculated balance in the event
   private BigDecimal newBalance;
 }

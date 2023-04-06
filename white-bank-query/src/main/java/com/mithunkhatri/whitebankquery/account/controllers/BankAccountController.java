@@ -17,6 +17,9 @@ import com.mithunkhatri.whitebankquery.utils.InstantUtil;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Bank account query controller
+ */
 @RestController
 @RequestMapping(value = "/accounts")
 @AllArgsConstructor
@@ -24,6 +27,9 @@ public class BankAccountController {
 
   private BankAccountService bankAccountService;
 
+  /**
+   * Gets all bank accounts. Does not include transaction details
+   */
   @GetMapping
   public List<BankAccountResponse> all() {
 
@@ -33,6 +39,10 @@ public class BankAccountController {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Gets all the bank account details which are in red. i.e., balance is
+   * negative.
+   */
   @GetMapping(value = "/red")
   public List<BankAccountResponse> red() {
     return this.bankAccountService.getAllRed()
@@ -41,16 +51,26 @@ public class BankAccountController {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Gets account details by account id
+   */
   @GetMapping(value = "/{accountId}")
   public BankAccountResponse account(@PathVariable String accountId) {
     return docToResponse(this.bankAccountService.validateAndGet(accountId));
   }
 
+  /**
+   * Gets account current balance
+   */
   @GetMapping(value = "/{accountId}/balance")
   public BankAccountBalanceResponse balance(@PathVariable String accountId) {
     return docToBalanceResponse(this.bankAccountService.validateAndGet(accountId));
   }
 
+  /**
+   * Gets all the transactions for the account id since a provided date. If the
+   * date is not provided, then all the transactions are returned.
+   */
   @GetMapping(value = "/{accountId}/transactions")
   public List<AccountTransactionResponse> accountTransactions(@PathVariable String accountId,
       @RequestParam(required = false) String since) {

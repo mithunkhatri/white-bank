@@ -8,6 +8,24 @@
 	},
 	"item": [
 		{
+			"name": "Gateway health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/actuator/health",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Bank Account",
 			"event": [
 				{
@@ -25,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"accountOwner\": \"Mithun\",\n    \"initialDeposit\": 100,\n    \"creditLine\": 100\n}",
+					"raw": "{\n    \"accountOwner\": \"Mithun\",\n    \"initialDeposit\": 1,\n    \"creditLine\": 100\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,7 +70,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"amount\": 10\n}",
+					"raw": "{\n    \"amount\": -10\n}",
 					"options": {
 						"raw": {
 							"language": "json"

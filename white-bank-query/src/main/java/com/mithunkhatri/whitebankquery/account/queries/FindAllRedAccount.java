@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FindAllRedAccount {
-    
-    private BigDecimal redMarker;
+
+  // balance to mark the account red
+  private BigDecimal redMarker;
 }

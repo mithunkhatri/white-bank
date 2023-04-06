@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FindAllAccount {
-    
-    private String id;
+
+  // Dummy parameter. Not being used in the query
+  private String id;
 }
