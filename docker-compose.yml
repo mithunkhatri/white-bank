@@ -9,3 +9,26 @@ services:
     image: openzipkin/zipkin
     ports:
       - 9411:9411
+  eureka:
+    build: ./white-bank-eureka-server
+    ports:
+      - 8671:8671
+    depends_on:
+      - axonserver
+  cmd:
+    build: ./white-bank-cmd
+    depends_on:
+      - axonserver
+      - eureka
+  query:
+    build: ./white-bank-query
+    depends_on:
+      - axonserver
+      - eureka
+  gateway:
+    build: ./white-bank-gateway
+    ports:
+      - 8080:8080
+    depends_on:
+      - axonserver
+      - eureka

@@ -21,9 +21,10 @@ White Bank - Implementation of CQRS using Axon Framework, Axon Server and Spring
 - [x] Gateway : Routing of the service requests from the client
 - [x] Distributed tracing
 
-### CI
+### Builds and CI
 - [x] Multi module maven project
 - [x] Github Actions to build maven on commit
+- [x] Dockerize the services
 
 ```
 [INFO] Reactor Summary for White Bank Parent 0.0.1-SNAPSHOT:
@@ -41,6 +42,14 @@ White Bank - Implementation of CQRS using Axon Framework, Axon Server and Spring
 [INFO] Finished at: 2023-04-06T00:31:51+05:30
 [INFO] ------------------------------------------------------------------------
 ```
+
+### Quick start the services
+- Take a clone of the repository and cd into the folder
+- [Run this startup script](/assets/scripts/startup.sh)
+  Startup script performs following tasks
+    - Run `mvn clean install` to build the jars
+    - `docker-compose build` --> to build the images directly from local
+    - `docker-compose up -d` --> starts the docker images
 
 ## Features Implemented
 Command
