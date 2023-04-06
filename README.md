@@ -19,8 +19,7 @@ White Bank - Implementation of CQRS using Axon Framework, Axon Server and Spring
 - [x] Axon Server : Running in a docker container
 - [x] Eureka Server : Service discovery
 - [x] Gateway : Routing of the service requests from the client
-  - [ ] Circuit breaker
-- [ ] Distributed tracing
+- [x] Distributed tracing
 
 ### CI
 - [x] Multi module maven project
@@ -60,6 +59,7 @@ Query
 ## Assumptions
 - Bank account is a single currency type account. Debit, credit and initial balance are all in the same currency. Exchange rate and currency conversion is not required.
 - Debit request exceeding the credit line are marked as PENDING, reprocessing of the PENDING transaction is not required
+- If the credit line exceeds on a debit transaction, transaction is still accepted and kept in pending state. 
 - Account owner details management is not required
 
 # High Level Diagram

@@ -5,3 +5,7 @@ services:
     ports:
       - 8024:8024
       - 8124:8124
+  zipkinserver:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
