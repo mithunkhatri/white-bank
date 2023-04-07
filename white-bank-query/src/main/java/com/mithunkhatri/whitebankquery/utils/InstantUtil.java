@@ -16,6 +16,9 @@ public class InstantUtil {
    * @return
    */
   public static Instant toInstant(String since) {
+    if(since == null) {
+      return null;
+    }
     LocalDate localDate = LocalDate.parse(since, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     return localDate.atStartOfDay(ZoneId.of("UTC")).toInstant();
   }

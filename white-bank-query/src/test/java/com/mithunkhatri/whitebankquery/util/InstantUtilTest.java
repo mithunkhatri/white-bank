@@ -1,10 +1,12 @@
 package com.mithunkhatri.whitebankquery.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.format.DateTimeParseException;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,7 +25,12 @@ public class InstantUtilTest {
 
   @ParameterizedTest
   @ValueSource(strings = { "", "randomdatestring", "2023-19-19", "2023-13-01", "23-01-01" })
-  public void testISOStringDateToInstant() {
-    assertThrows(DateTimeParseException.class, () -> InstantUtil.toInstant(""));
+  public void testInvalidDateToInstant(String since) {
+    assertThrows(DateTimeParseException.class, () -> InstantUtil.toInstant(since));
+  }
+
+  @Test
+  public void testNullDateToInstant() {
+    assertNull(InstantUtil.toInstant(null));
   }
 }
