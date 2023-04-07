@@ -70,6 +70,7 @@ Query
 - Debit request exceeding the credit line are marked as PENDING, reprocessing of the PENDING transaction is not required
 - If the credit line exceeds on a debit transaction, transaction is still accepted and kept in pending state. 
 - Account owner details management is not required
+- Once account is created its always active. Handling inactive or closing of account is not required.
 
 # High Level Diagram
 ![High Level Diagram](/assets/images/HighLevel.png "High Level Diagram")
